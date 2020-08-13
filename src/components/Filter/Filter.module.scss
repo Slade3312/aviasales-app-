@@ -1,0 +1,21 @@
+@import "~antd/dist/antd.css";
+
+$color-white: #ffffff;
+
+.wrapper {
+    width: 100%;
+    height: fit-content;
+    background-color: $color-white;
+    font-size: 1.3em;
+    line-height: 2em;
+    padding: 2vh 6vw;
+    border-radius: 5px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-weight: 600;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    letter-spacing: 0.5px;
+}

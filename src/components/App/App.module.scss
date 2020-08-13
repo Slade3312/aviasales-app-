@@ -1,0 +1,14 @@
+@import "~antd/dist/antd.css";
+
+$color-mainBack: #e5e5e5;
+$color-font: #4a4a4a;
+
+.App {
+    font-family: "OpenSans";
+    font-size: 10px;
+    line-height: 10px;
+    background-color: $color-mainBack;
+    height: 100vh;
+    padding: 2vh 5vw;
+    color: $color-font;
+}
