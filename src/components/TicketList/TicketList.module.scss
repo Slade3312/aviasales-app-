@@ -1,0 +1,9 @@
+@import '../../variable.scss';
+
+.wrapper {
+  width: 100%;
+  max-width: 502px;
+  height: fit-content;
+  margin: 0 auto;
+  grid-area: ticketlist;
+}

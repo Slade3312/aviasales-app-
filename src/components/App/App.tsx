@@ -3,6 +3,7 @@ import appClass from './App.module.scss';
 import Logo from '../Logo/Logo';
 import Filter from '../Filter/Filter';
 import Tabs from '../Tabs/Tabs';
+import TicketList from '../TicketList/TicketList';
 
 const App: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const App: React.FC = () => {
       <Logo />
       <Filter />
       <Tabs />
+      <TicketList />
     </div>
   );
 };

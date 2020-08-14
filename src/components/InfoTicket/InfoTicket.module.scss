@@ -1,0 +1,22 @@
+@import '../../variable.scss';
+
+.info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.info h4 {
+  font-weight: 600;
+  font-size: 1.2em;
+  line-height: 1.8em;
+  letter-spacing: 0.5px;
+  color: $color-font-title-info;
+}
+
+.info span {
+  font-weight: 600;
+  font-size: 1.4em;
+  line-height: 2.1em;
+}
