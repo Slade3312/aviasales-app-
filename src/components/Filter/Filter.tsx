@@ -1,8 +1,9 @@
 import React from 'react';
-import filterClass from './Filter.module.scss';
 import { Checkbox } from 'antd';
+import { connect } from 'react-redux';
+import filterClass from './Filter.module.scss';
 
-const Filter: React.FC = () => {
+const Filter: React.FC = (props: any) => {
   return (
     <div className={filterClass.wrapper}>
       <h4 className={filterClass.title}>КОЛИЧЕСТВО ПЕРЕСАДОК</h4>
@@ -19,4 +20,10 @@ const Filter: React.FC = () => {
   );
 };
 
-export default Filter;
+function mapStateToProps(state: any) {
+  return {
+    filter: state.filter,
+  };
+}
+
+export default connect(mapStateToProps)(Filter);

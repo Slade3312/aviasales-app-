@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import React from 'react';
 import appClass from './App.module.scss';
 import Logo from '../Logo/Logo';
