@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import React from 'react';
 import ticketClass from './Ticket.module.scss';
 import InfoTicket from '../InfoTicket/InfoTicket';
