@@ -4,12 +4,13 @@ import { connect, ConnectedProps } from 'react-redux';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import filterClass from './Filter.module.scss';
 import { State, TransferType } from '../../store/types';
-import * as action from '../../store/action/actions';
-import isAll from '../../selectors';
+import * as action from '../../store/action/actionsFilter';
+import { isAll } from '../../store/selectors';
 
 function mapStateToProps(state: State) {
+  const { filterTransfer } = state.reducerFilter;
   return {
-    filterTransfer: state.filterTransfer,
+    filterTransfer,
   };
 }
 

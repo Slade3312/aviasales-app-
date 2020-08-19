@@ -11,6 +11,8 @@ const filterTwo = (payload: boolean): ActionFilterType => ({ type: TransferType.
 const filterThree = (payload: boolean): ActionFilterType => ({ type: TransferType.ThreeTransfer, payload });
 
 
+
+
 export {
     filterAll,
     filterNone,

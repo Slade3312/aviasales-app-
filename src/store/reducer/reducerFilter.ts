@@ -1,10 +1,10 @@
-import { State, ActionFilterType, ActionFilterTypeAll, TransferType } from '../types';
+import { StateFilter, ActionFilterType, ActionFilterTypeAll, TransferType } from '../types';
 
-const initialState: State = {
+const initialState: StateFilter = {
   filterTransfer: [],
 };
 
-export default function reducer(state: State = initialState, actions: ActionFilterType | ActionFilterTypeAll): State {
+export default function reducerFilter(state: StateFilter = initialState, actions: ActionFilterType | ActionFilterTypeAll): StateFilter {
   switch (actions.type) {
     case 'ALL': {
       return {
@@ -25,7 +25,6 @@ export default function reducer(state: State = initialState, actions: ActionFilt
     }
     default: return state;
   }
-
 }
 
 
