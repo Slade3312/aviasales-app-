@@ -1,4 +1,3 @@
-
 export type State = {
     reducerFilter: StateFilter,
     reducerTicket: StateTicket,
@@ -27,11 +26,19 @@ export enum TransferType {
     ThreeTransfer = 'Three_Transfer',
 }
 
+export enum NumberTransfer {
+    'No_Transfers' = 0,
+    'One_Transfer' = 1,
+    'Two_Transfer' = 2,
+    'Three_Transfer' = 3
+}
+
 // ticket type //
 
 export type StateTicket = {
     ticketsId: string,
     tickets: TicketType[],
+    ticketsFilter: TicketType[],
     stop?: boolean
 }
 
@@ -44,13 +51,20 @@ export type ActionSetTicketId = {
     ticketsId: string
 }
 
-export type ActionsTicket = ActionSetTicketId | ActionSetTicket
 
-export type ActionSetTicket = {
-    type: 'Set_Ticket',
+export type ActionSetTickets = {
+    type: 'Set_Tickets',
     tickets: TicketType[],
     stop: boolean
 }
+
+export type ActionFilterTickets = {
+    type: 'FILTER_TICKETS',
+    tickets: TicketType[],
+    filterTransfer: TransferType[]
+}
+
+export type ActionsTickets = ActionSetTicketId | ActionSetTickets | ActionFilterTickets
 
 export type responseTicket = {
     tickets: TicketType[],

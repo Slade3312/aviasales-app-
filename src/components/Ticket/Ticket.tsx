@@ -8,8 +8,10 @@ const Ticket: React.FC<TicketType> = ({ price, carrier, segments }) => {
   return (
     <div className={ticketClass.wrapper}>
       <div className={ticketClass['price-carrier']}>
-        <span className={ticketClass.price}>{price}</span>
-        <span className={ticketClass.carrier}>{carrier}</span>
+        <span className={ticketClass.price}>{price} P</span>
+        <span className={ticketClass.carrier}>
+          <img src={`http://pics.avs.io/99/36/${carrier}.png`} alt="LogoAirLine" />
+        </span>
       </div>
       <InfoTicket {...segments[0]} />
       <InfoTicket {...segments[1]} />

@@ -1,6 +1,14 @@
 import { Dispatch } from 'redux'
-import { ActionSetTicketId, ActionSetTicket, TicketType } from '../types'
 import { getTicketsId, getTickets } from '../selectors'
+import { ActionFilterTickets, TicketType, TransferType } from '../types'
+
+const setTicketsFilter = (tickets: TicketType[], filterTransfer: TransferType[]): ActionFilterTickets => {
+    return {
+        type: 'FILTER_TICKETS',
+        tickets,
+        filterTransfer
+    }
+}
 
 const setTicketId = () => {
     return (dispatch: Dispatch): void => {
@@ -20,14 +28,14 @@ const setTicket = (id: string) => {
             .then((value) => {
                 const { tickets, stop } = value;
                 dispatch({
-                    type: "Set_Ticket",
+                    type: "Set_Tickets",
                     tickets,
                     stop
                 })
             })
             .catch(() => {
                 dispatch({
-                    type: "Set_Ticket",
+                    type: "Set_Tickets",
                     tickets: [],
                     stop: false
                 })
@@ -37,6 +45,7 @@ const setTicket = (id: string) => {
 
 export {
     setTicketId,
-    setTicket
+    setTicket,
+    setTicketsFilter
 }
 

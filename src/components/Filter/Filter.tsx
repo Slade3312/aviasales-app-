@@ -20,8 +20,7 @@ const connector = connect(mapStateToProps, mapDispatch);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
-const Filter: React.FC<Props> = (props: Props) => {
-  const { filterTransfer, filterAll, filterNone, filterOne, filterTwo, filterThree } = props;
+const Filter: React.FC<Props> = ({ filterTransfer, filterAll, filterNone, filterOne, filterTwo, filterThree }) => {
   const all = isAll(filterTransfer);
   const noneTransfer = filterTransfer.indexOf(TransferType.NoTransfers) >= 0;
   const oneTransfer = filterTransfer.indexOf(TransferType.OneTransfer) >= 0;
