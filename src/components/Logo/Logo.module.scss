@@ -1,0 +1,11 @@
+@import '../../variable.scss';
+
+.wrapper {
+  height: 100px;
+  grid-area: logo;
+}
+
+.img-logo {
+  display: block;
+  margin: 0 auto;
+}

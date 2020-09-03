@@ -1,0 +1,34 @@
+@import '../../variable.scss';
+
+.wrapper {
+  width: 100%;
+  max-width: 502px;
+  background-color: #ffffff;
+  border: 1px solid #dfe5ec;
+  border-radius: 5px;
+  height: 50px;
+  margin: 10px auto 0 auto;
+  overflow: hidden;
+  grid-area: tabs;
+}
+
+.button {
+  border: none;
+  background-color: inherit;
+  width: 50%;
+  height: 100%;
+  font-weight: 600;
+  font-size: 1.2em;
+  line-height: 2em;
+}
+
+.active {
+  background-color: $color-blue;
+  color: $color-white;
+}
+
+@media screen and (min-width: $desktop-width) {
+  .wrapper {
+    margin: 0;
+  }
+}

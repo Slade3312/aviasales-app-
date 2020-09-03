@@ -1,0 +1,29 @@
+@import '~antd/dist/antd.css';
+@import '../../variable.scss';
+
+.wrapper {
+  width: 100%;
+  max-width: 232px;
+  height: 220px;
+  background-color: $color-white;
+  font-size: 1.3em;
+  line-height: 2em;
+  padding: 12px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  grid-area: filter;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  letter-spacing: 0.5px;
+}
+
+@media screen and (min-width: $desktop-width) {
+  .wrapper {
+    margin: 0;
+  }
+}

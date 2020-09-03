@@ -1,0 +1,22 @@
+@import '../../variable.scss';
+
+.wrapper {
+  width: 100%;
+  max-width: 502px;
+  height: fit-content;
+  margin: 0 auto;
+  grid-area: ticketlist;
+}
+
+.button {
+  max-width: 502px;
+  height: 50px;
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.spin {
+  display: block;
+  margin-top: 10px;
+}
