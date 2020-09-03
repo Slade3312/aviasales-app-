@@ -3,19 +3,20 @@ import { Spin, Alert, Button, Progress } from 'antd';
 import { connect, ConnectedProps } from 'react-redux';
 import ticketListClass from './TicketList.module.scss';
 import Ticket from '../Ticket/Ticket';
-import { State, TicketType } from '../../store/types';
+import { State } from '../../store/types';
 import * as action from '../../store/action/actionsTickets';
 import { filterTickets } from '../../store/selectors';
 
 function mapStateToProps(state: State) {
-  const { filterTransfer } = state.reducerFilter;
-  const { tickets, ticketsId, stop, ticketsFilter } = state.reducerTicket;
+  const { filterTransfer, tabs } = state.reducerFilter;
+  const { tickets, ticketsId, stop } = state.reducerTicket;
   return {
     tickets,
     ticketsId,
     stop,
     filterTransfer,
-    ticketsFilter,
+    tabs,
+    ticketsFilter: filterTickets(tickets)(filterTransfer)(tabs),
   };
 }
 
@@ -25,19 +26,11 @@ const connector = connect(mapStateToProps, mapDispatch);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
-const TicketList: React.FC<Props> = ({
-  ticketsId,
-  setTicketId,
-  setTicket,
-  setTicketsFilter,
-  tickets,
-  stop,
-  ticketsFilter,
-  filterTransfer,
-}) => {
+// !! Думал вынести в hoc всю логигу но пока элемент небольшой и эта логика только к нему относится не стал
+
+const TicketList: React.FC<Props> = ({ ticketsId, setTicketId, setTicket, tickets, stop, ticketsFilter }) => {
   const percent = Math.floor((tickets.length * 100) / 10000);
 
-  // const [ticketsFilter, setTicketsFilter] = useState<TicketType[]>([]);
   const [numberVisibility, setNumberVisibility] = useState<number>(5);
 
   const addTicket = (): void => {
@@ -51,15 +44,14 @@ const TicketList: React.FC<Props> = ({
   }, [setTicket, setTicketId, stop, tickets, ticketsId]);
 
   useEffect(() => {
-    if (tickets.length !== 0) {
-      setTicketsFilter(tickets, filterTransfer);
-    } else setTicketsFilter(tickets, filterTransfer);
-  }, [filterTransfer, setTicketsFilter, tickets]);
+    setNumberVisibility(5);
+  }, [ticketsFilter]);
 
   const content = ticketsFilter.slice(0, numberVisibility).map((tik) => {
-    const key = Math.random() + tik.price;
-    // console.log(tik, key);
-    console.log('render');
+    //  id в API нет старался сделать уникальным
+
+    const key = tik.carrier + tik.segments[0].date + tik.segments[0].origin + tik.segments[0].destination;
+
     return <Ticket key={key} {...tik} />;
   });
 

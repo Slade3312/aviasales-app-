@@ -1,25 +1,50 @@
 import React from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import tabsClass from './Tabs.module.scss';
+import { State } from '../../store/types';
+import { filterTabs } from '../../store/action/actionsFilter';
 
-const Tabs: React.FC = () => {
+function mapStateToProps(state: State) {
+  const { tabs, filterTransfer } = state.reducerFilter;
+  return {
+    tabs,
+    filterTransfer,
+  };
+}
+
+const connector = connect(mapStateToProps, { filterTabs });
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux;
+
+// eslint-disable-next-line no-shadow
+const Tabs: React.FC<Props> = ({ filterTabs, tabs }) => {
   const onClickCheap = () => {
-    console.log('Cheap');
+    filterTabs('Cheap');
   };
 
   const onClickFast = () => {
-    console.log('Fast');
+    filterTabs('Fast');
   };
 
   return (
     <div className={tabsClass.wrapper}>
-      <button type="button" className={`${tabsClass.button} ${tabsClass.active}`} onClick={onClickCheap}>
+      <button
+        type="button"
+        className={`${tabsClass.button} ${tabs === 'Cheap' && tabsClass.active}`}
+        onClick={onClickCheap}
+      >
         САМЫЙ ДЕШЕВЫЙ
       </button>
-      <button type="button" className={tabsClass.button} onClick={onClickFast}>
+      <button
+        type="button"
+        className={`${tabsClass.button} ${tabs === 'Fast' && tabsClass.active}`}
+        onClick={onClickFast}
+      >
         САМЫЙ БЫСТРЫЙ
       </button>
     </div>
   );
 };
 
-export default Tabs;
+export default connector(Tabs);

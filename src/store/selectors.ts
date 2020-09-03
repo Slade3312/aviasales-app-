@@ -1,4 +1,4 @@
-import { TransferType, resId, responseTicket, NumberTransfer, TicketType } from "./types";
+import { TransferType, NumberTransfer, TicketType, FilterTabsType } from "./types";
 
 
 const isAll = (filter: TransferType[]): boolean => {
@@ -6,48 +6,53 @@ const isAll = (filter: TransferType[]): boolean => {
     return filter.length === allFilterTypes.length;
 }
 
-const getTicketsId = async (): Promise<resId> => {
-    const res = await fetch('https://front-test.beta.aviasales.ru/search');
-    return res.json()
-}
+const filterTickets = (tickets: TicketType[]) => {
 
-const getTickets = async (id: string): Promise<responseTicket> => {
-    const res = await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${id}`);
-    return res.json()
-}
+    return (filterTransfer: TransferType[]): FilterTabsType => {
+        let filterTicks: TicketType[] = [];
+        filterTransfer.forEach((valueFilter) => {
+            switch (valueFilter) {
+                case 'No_Transfers':
+                    filterTicks = filterTicks.concat(
+                        ...tickets.filter(({ segments }) => segments[0].stops.length === 0 && segments[1].stops.length === 0)
+                    );
+                    break;
+                case 'One_Transfer':
+                case 'Two_Transfer':
+                case 'Three_Transfer':
+                    filterTicks = filterTicks.concat(
+                        ...tickets.filter(
+                            ({ segments }) =>
+                                (segments[0].stops.length === NumberTransfer[valueFilter] &&
+                                    segments[1].stops.length < NumberTransfer[valueFilter]) ||
+                                (segments[1].stops.length === NumberTransfer[valueFilter] &&
+                                    segments[0].stops.length < NumberTransfer[valueFilter])
+                        )
+                    );
+                    break;
+                default:
+                    filterTicks = [];
+            }
+        });
+        return (tabs: string): TicketType[] => {
+            switch (tabs) {
+                case 'Cheap': {
+                    return filterTicks.sort((a, b) => a.price - b.price)
+                }
+                case 'Fast': {
+                    return filterTicks.sort((a, b) => (a.segments[0].duration + a.segments[1].duration) -
+                        (b.segments[0].duration + b.segments[1].duration))
+                }
+                default: return filterTicks
+            }
 
-const filterTickets = (tickets: TicketType[], filterTransfer: TransferType[]): TicketType[] => {
-    let filterTicks: TicketType[] = [];
-    filterTransfer.forEach((valueFilter) => {
-        switch (valueFilter) {
-            case 'No_Transfers':
-                filterTicks = filterTicks.concat(
-                    ...tickets.filter(({ segments }) => segments[0].stops.length === 0 && segments[1].stops.length === 0)
-                );
-                break;
-            case 'One_Transfer':
-            case 'Two_Transfer':
-            case 'Three_Transfer':
-                filterTicks = filterTicks.concat(
-                    ...tickets.filter(
-                        ({ segments }) =>
-                            (segments[0].stops.length === NumberTransfer[valueFilter] &&
-                                segments[1].stops.length < NumberTransfer[valueFilter]) ||
-                            (segments[1].stops.length === NumberTransfer[valueFilter] &&
-                                segments[0].stops.length < NumberTransfer[valueFilter])
-                    )
-                );
-                break;
-            default:
-                filterTicks = [];
+
         }
-    });
-    return filterTicks;
+    }
+
 };
 
 export {
     isAll,
-    getTicketsId,
-    getTickets,
     filterTickets
 }

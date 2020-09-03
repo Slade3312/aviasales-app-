@@ -5,13 +5,20 @@ export type State = {
 
 // filter type //
 
+
 export type StateFilter = {
-    filterTransfer: TransferType[]
+    filterTransfer: TransferType[],
+    tabs: string
 }
 
 export type ActionFilterType = {
     type: TransferType,
     payload: boolean
+}
+
+export type ActionFilterTabs = {
+    type: 'Toggle_Tabs',
+    payload: string
 }
 
 export type ActionFilterTypeAll = {
@@ -118,3 +125,12 @@ export type SegmentsType = {
     // Общее время перелёта в минутах
     duration: number
 }
+
+export type ErrorState = {
+    hasError: boolean
+}
+
+// function 
+
+export type FilterTabsType = (tabs: string) => TicketType[]
+

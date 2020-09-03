@@ -1,5 +1,4 @@
 import { StateTicket, ActionsTickets } from '../types';
-import { filterTickets } from '../selectors'
 
 const initialState: StateTicket = {
     ticketsId: '',
@@ -20,11 +19,7 @@ export default function reducerTicket(state: StateTicket = initialState, actions
             const tickets = state.tickets.concat(newTickets)
             return { ...state, tickets, stop }
         }
-        case 'FILTER_TICKETS': {
-            const { tickets, filterTransfer } = actions;
-            const ticketsFilter = filterTickets(tickets, filterTransfer);
-            return { ...state, ticketsFilter }
-        }
+
         default: return state;
 
     }
