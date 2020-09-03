@@ -12,14 +12,14 @@ const filterTickets = (tickets: TicketType[]) => {
         let filterTicks: TicketType[] = [];
         filterTransfer.forEach((valueFilter) => {
             switch (valueFilter) {
-                case 'No_Transfers':
+                case TransferType.NoTransfers:
                     filterTicks = filterTicks.concat(
                         ...tickets.filter(({ segments }) => segments[0].stops.length === 0 && segments[1].stops.length === 0)
                     );
                     break;
-                case 'One_Transfer':
-                case 'Two_Transfer':
-                case 'Three_Transfer':
+                case TransferType.OneTransfer:
+                case TransferType.TwoTransfer:
+                case TransferType.ThreeTransfer:
                     filterTicks = filterTicks.concat(
                         ...tickets.filter(
                             ({ segments }) =>
