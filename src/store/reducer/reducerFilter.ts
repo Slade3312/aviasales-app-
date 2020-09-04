@@ -1,13 +1,13 @@
-import { StateFilter, ActionFilterType, ActionFilterTypeAll, TransferType, ActionFilterTabs } from '../types';
+import { StateFilter, ActionFilterType, TransferType, FilterType, ActionFilterTabsType } from '../types';
 
 const initialState: StateFilter = {
   filterTransfer: [],
   tabs: 'Cheap'
 };
 
-export default function reducerFilter(state: StateFilter = initialState, action: ActionFilterType | ActionFilterTypeAll | ActionFilterTabs): StateFilter {
+export default function reducerFilter(state: StateFilter = initialState, action: ActionFilterType | ActionFilterTabsType): StateFilter {
   switch (action.type) {
-    case 'ALL': {
+    case FilterType.All: {
       return {
         ...state,
         filterTransfer: action.payload ? Object.values(TransferType) : []
@@ -26,7 +26,7 @@ export default function reducerFilter(state: StateFilter = initialState, action:
         filterTransfer: newFilterTransfer
       }
     }
-    case 'Toggle_Tabs': {
+    case FilterType.ToggleTabs: {
       return {
         ...state,
         tabs: action.payload

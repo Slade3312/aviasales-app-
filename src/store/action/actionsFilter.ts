@@ -1,6 +1,6 @@
-import { ActionFilterType, TransferType, ActionFilterTypeAll, ActionFilterTabs } from '../types';
+import { ActionFilterType, TransferType, FilterType, ActionFilterTabsType } from '../types';
 
-const filterAll = (payload: boolean): ActionFilterTypeAll => ({ type: 'ALL', payload });
+const filterAll = (payload: boolean): ActionFilterType => ({ type: FilterType.All, payload });
 
 const filterNone = (payload: boolean): ActionFilterType => ({ type: TransferType.NoTransfers, payload });
 
@@ -10,7 +10,7 @@ const filterTwo = (payload: boolean): ActionFilterType => ({ type: TransferType.
 
 const filterThree = (payload: boolean): ActionFilterType => ({ type: TransferType.ThreeTransfer, payload });
 
-const filterTabs = (payload: string): ActionFilterTabs => ({ type: 'Toggle_Tabs', payload })
+const filterTabs = (payload: string): ActionFilterTabsType => ({ type: FilterType.ToggleTabs, payload })
 
 
 

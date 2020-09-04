@@ -1,29 +1,6 @@
-export type State = {
-    reducerFilter: StateFilter,
-    reducerTicket: StateTicket,
-}
-
-// filter type //
-
-
-export type StateFilter = {
-    filterTransfer: TransferType[],
-    tabs: string
-}
-
-export type ActionFilterType = {
-    type: TransferType,
-    payload: boolean
-}
-
-export type ActionFilterTabs = {
-    type: 'Toggle_Tabs',
-    payload: string
-}
-
-export type ActionFilterTypeAll = {
-    type: 'ALL',
-    payload: boolean
+export enum FilterType {
+    All = 'ALL',
+    ToggleTabs = 'Toggle_Tabs'
 }
 
 export enum TransferType {
@@ -40,12 +17,46 @@ export enum NumberTransfer {
     'Three_Transfer' = 3
 }
 
+export enum SetTicketType {
+    SetId = 'Set_Id',
+    SetTickets = 'Set_Tickets',
+}
+
+export enum SetTabsType {
+    Cheap = 'Cheap',
+    Fast = 'Fast'
+}
+
+export type State = {
+    reducerFilter: StateFilter,
+    reducerTicket: StateTicket,
+}
+
+// filter type //
+
+
+export type StateFilter = {
+    filterTransfer: TransferType[],
+    tabs: string
+}
+
+export type ActionFilterType = {
+    type: TransferType | FilterType.All,
+    payload: boolean
+}
+
+export type ActionFilterTabsType = {
+    type: FilterType.ToggleTabs,
+    payload: string
+}
+
+
+
 // ticket type //
 
 export type StateTicket = {
     ticketsId: string,
     tickets: TicketType[],
-    ticketsFilter: TicketType[],
     stop?: boolean
 }
 
@@ -54,24 +65,18 @@ export type resId = {
 }
 
 export type ActionSetTicketId = {
-    type: 'Set_Id',
+    type: SetTicketType.SetId,
     ticketsId: string
 }
 
 
 export type ActionSetTickets = {
-    type: 'Set_Tickets',
+    type: SetTicketType.SetTickets,
     tickets: TicketType[],
     stop: boolean
 }
 
-export type ActionFilterTickets = {
-    type: 'FILTER_TICKETS',
-    tickets: TicketType[],
-    filterTransfer: TransferType[]
-}
-
-export type ActionsTickets = ActionSetTicketId | ActionSetTickets | ActionFilterTickets
+export type ActionsTickets = ActionSetTicketId | ActionSetTickets
 
 export type responseTicket = {
     tickets: TicketType[],

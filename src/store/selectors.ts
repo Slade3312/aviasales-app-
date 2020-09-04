@@ -1,4 +1,4 @@
-import { TransferType, NumberTransfer, TicketType, FilterTabsType } from "./types";
+import { TransferType, NumberTransfer, TicketType, FilterTabsType, SetTabsType } from "./types";
 
 
 const isAll = (filter: TransferType[]): boolean => {
@@ -36,10 +36,10 @@ const filterTickets = (tickets: TicketType[]) => {
         });
         return (tabs: string): TicketType[] => {
             switch (tabs) {
-                case 'Cheap': {
+                case SetTabsType.Cheap: {
                     return filterTicks.sort((a, b) => a.price - b.price)
                 }
-                case 'Fast': {
+                case SetTabsType.Fast: {
                     return filterTicks.sort((a, b) => (a.segments[0].duration + a.segments[1].duration) -
                         (b.segments[0].duration + b.segments[1].duration))
                 }
