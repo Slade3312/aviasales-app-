@@ -13,6 +13,7 @@ const InfoTicket: React.FC<SegmentsType> = ({ origin, destination, date, duratio
   const originTime = new Date(date).toTimeString().slice(0, 5);
   const destinationTime = new Date(Date.parse(date) + durationMs).toTimeString().slice(0, 5);
   const stopsName = stops.join();
+  const transplants = stops.length;
   const durationWay = timeInWay(duration);
 
   return (
@@ -26,7 +27,7 @@ const InfoTicket: React.FC<SegmentsType> = ({ origin, destination, date, duratio
         <span className={infoTicketClass['duration-name']}>{durationWay}</span>
       </div>
       <div className={infoTicketClass.stop}>
-        <h5 className={infoTicketClass['stops-name']}>N ПЕРЕСАДОК</h5>
+        <h5 className={infoTicketClass['stops-name']}>{`${transplants} ПЕРЕСАДОК`}</h5>
         <span className={infoTicketClass['stops-name']}>{stopsName}</span>
       </div>
     </div>
