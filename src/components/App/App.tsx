@@ -8,6 +8,7 @@ import TicketList from '../TicketList/TicketList';
 const App: React.FC = () => {
   return (
     <div className={appClass.App}>
+      <h1>Всем привет</h1>
       <Logo />
       <Filter />
       <Tabs />
